@@ -53,6 +53,10 @@ MAPEO_MONEDAS = {
 def obtener_cotizacion(texto_usuario):
     texto_usuario = texto_usuario.lower()
 
+    # Mensaje de bienvenida si saluda o pide ayuda
+    if any(palabra in texto_usuario for palabra in ["hola", "buenas", "ayuda", "hello", "qué hace", "como andas", "buen día", "buen dia"]):
+        return mensaje_bienvenida()
+
     # 👉 Mostrar todos los tipos de dólar
     if "todos los dólares" in texto_usuario or "todos los dolares" in texto_usuario or "ver dolares" in texto_usuario:
         return obtener_todos_los_dolares()
@@ -117,3 +121,16 @@ def obtener_todas_las_cotizaciones():
         mensaje += f"💱 {moneda} ({simbolo}):\n  Compra: ${compra}\n  Venta: ${venta}\n\n"
 
     return mensaje.strip()
+
+def mensaje_bienvenida():
+    return (
+        "👋 ¡Hola! Soy un bot de cotizaciones de monedas 💱\n\n"
+        "Podés escribirme por ejemplo:\n"
+        "- `dólar blue`\n"
+        "- `euro`\n"
+        "- `peso chileno`\n\n"
+        "También podés usar estos comandos:\n"
+        "🔹 *Todos los dólares* → muestra todas las cotizaciones del dólar\n"
+        "🔹 *Todas las monedas* → muestra cotización de monedas extranjeras\n\n"
+        "✅ Escribí el nombre de la moneda y te paso su valor actual."
+    )
